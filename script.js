@@ -1,17 +1,17 @@
-// Fetch trending coins using CoinGecko API
-const fetchTrendingCoins = async () => {
+// Fetch trending pairs using DEX Screener API
+const fetchTrendingPairs = async () => {
   try {
-    const response = await fetch('https://api.coingecko.com/api/v3/search/trending');
+    const response = await fetch('https://api.dexscreener.com/latest/dex/search');
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
     const data = await response.json();
 
     // Check if the data exists and display it on the website
-    if (data && data.coins) {
-      displayCoins(data.coins);
+    if (data && data.pairs) {
+      displayPairs(data.pairs);
     } else {
-      throw new Error('No coins data available');
+      throw new Error('No pairs data available');
     }
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -19,24 +19,24 @@ const fetchTrendingCoins = async () => {
   }
 };
 
-const displayCoins = (coins) => {
+const displayPairs = (pairs) => {
   const container = document.getElementById('coin-container');
   container.innerHTML = ''; // Clear previous entries
 
-  coins.forEach((coinObj) => {
-    const coin = coinObj.item; // Extract coin object
-    const coinDiv = document.createElement('div');
-    coinDiv.classList.add('coin');
+  pairs.forEach((pair) => {
+    const pairDiv = document.createElement('div');
+    pairDiv.classList.add('pair');
 
-    coinDiv.innerHTML = `
-      <h3>${coin.name} (${coin.symbol.toUpperCase()})</h3>
-      <p>Rank: ${coin.market_cap_rank}</p>
-      <p><a href="https://www.coingecko.com/en/coins/${coin.id}" target="_blank">More Info</a></p>
+    pairDiv.innerHTML = `
+      <h3>${pair.baseToken.name} (${pair.baseToken.symbol.toUpperCase()})</h3>
+      <p>Exchange: ${pair.dexName}</p>
+      <p>Price: $${pair.priceUsd}</p>
+      <p><a href="${pair.url}" target="_blank">View Pair Details</a></p>
     `;
 
-    container.appendChild(coinDiv);
+    container.appendChild(pairDiv);
   });
 };
 
 // Load data on page load
-window.addEventListener('DOMContentLoaded', fetchTrendingCoins);
+window.addEventListener('DOMContentLoaded', fetchTrendingPairs);
