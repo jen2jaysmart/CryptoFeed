@@ -1,0 +1,61 @@
+/* Base styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+  color: #333;
+}
+
+header {
+  background-color: #3944bc;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+}
+
+header input#search {
+  padding: 0.5rem;
+  width: 80%;
+  margin-top: 1rem;
+}
+
+main {
+  padding: 2rem;
+}
+
+#coin-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.coin {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 200px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.coin:hover {
+  transform: scale(1.05);
+}
+
+.coin h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+div.coin p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+footer {
+  text-align: center;
+  margin-top: 2rem;
+}
